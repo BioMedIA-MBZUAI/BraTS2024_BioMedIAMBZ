@@ -1,0 +1,20 @@
+opencv-contrib-python==4.4.0.46
+pynrrd==1.0.0
+jupyter==1.0.0
+jupyterlab==3.4.5
+matplotlib==3.5.3
+wandb==0.15.4
+monai==1.1.0
+nibabel==5.1.0
+numpy==1.22.4
+pandas==2.0.3
+pytorch_lightning==1.9.5
+PyYAML==6.0
+typer==0.9.0
+connected-components-3d==3.12.1
+scikit-learn==1.0
+scikit-image==0.18.3
+torch==1.12.1+cu116
+torchvision==0.13.1+cu116
+torchaudio==0.12.1
+--extra-index-url https://download.pytorch.org/whl/cu116
