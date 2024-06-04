@@ -30,3 +30,9 @@ For training a `MedNeXt` model, you can run the following command (but you may n
 ```
 python mednext_train.py
 ```
+
+### 5-Fold CV Dice & HD95
+To calculate 5-fold CV Dice and HD95, we need to do two things;
+- get predictions from 5-fold (`cv-get-predictions.py`).
+- run post-processing and evaluation (`cv-postprocessing-and-eval.py`).
+- The idea of separating `cv-get-predictions.py` and `cv-postprocessing-and-eval.py` is to allow us to tune post-processing faster.
