@@ -3,6 +3,7 @@ import sys
 
 import copy
 import pytorch_lightning as pl
+import schedulefree
 import torch
 
 from monai.data import DataLoader
@@ -94,6 +95,9 @@ class TrainerModule(BaseTrainerModule):
             scheduler = PolynomialLR(
                 optimizer, total_iters=args.max_epochs, power=0.9,
             )
+        elif args.lr_scheduler == 'free':
+            optimizer = schedulefree.AdamWScheduleFree(self.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+            scheduler = None
         else:
             raise ValueError(f"Learning rate scheduler '{args.lr_scheduler}' is not recognized ...")
         

@@ -6,6 +6,8 @@ from monai.losses import (
     DiceLoss, DiceFocalLoss,
 )
 
+from monai.data.meta_tensor import MetaTensor
+
 class CriterionWrapper(nn.Module):
     def __init__(self, criterion):
         super().__init__()
@@ -13,7 +15,7 @@ class CriterionWrapper(nn.Module):
         self.criterion = criterion
     
     def forward(self, logits, target):
-        if type(logits) == torch.Tensor:
+        if type(logits) in [torch.Tensor, MetaTensor]:
             return self.criterion(logits, target)
         elif type(logits) == list:
             if logits[0].shape[-1] < logits[1].shape[-1]:
@@ -26,6 +28,8 @@ class CriterionWrapper(nn.Module):
                 loss += weight * self.criterion(_logits, self.interpolate_label(target, scale=weight))
             
             return loss
+        else:
+            raise ValueError(f'type(logits) {type(logits)} is not recognized')
     
     def interpolate_label(self, label, scale):
         dtype = label.dtype
